@@ -80,9 +80,10 @@
               
               <div class="card-footer">
                 <div class="row w-auto h-auto justify-content-between">
-                  <p class="card-text w-auto h-100 fw-bold">Pris:</p>
-                  <p class="card-text shop-item-price w-auto h-100">120 kr</p>
-                  <button class="btn btn-secondary w-50">Köp</button>
+                  <p class="card-text my-auto w-auto shop-item-id"></p>
+                  <p class="card-text my-auto w-auto h-100 fw-bold">Pris:</p>
+                  <p class="card-text my-auto shop-item-price w-auto h-100">120 kr</p>
+                  <button class="btn btn-secondary" style="width:35%">Köp</button>
                 </div>
               </div>
             </div>
@@ -96,17 +97,25 @@
     <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title text-white align-self-center" id="offcanvasRightLabel">Din Kundvagn</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-      <div class="offcanvas-body text-white">
+      <div class="offcanvas-body bg-dark">
         <!-- Vi vill ha items i kundvagnen här som cards -->
-        <div class="card" style="width: 90wv;">
-          <img src="img/25g-choco.jpg" class="card-img-top" alt="...">
+        <div class="card cart-item">
+          <img src="img/25g-choco.jpg" class="card-img-top card-img-top-cart" alt="...">
           <div class="card-body">
             <h5 class="card-title text-black">Card title</h5>
-            <p class="card-text text-black">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          
+          </div>
+          <div class="card-footer w-100 d-flex justify-content-between">
+            <span>Antal: </span><input type="number" value="1">
+            <button class="btn btn-danger btn-remove-cart-item" >Ta bort</button>
           </div>
         </div>
+      </div>
+      <div class="row m-3">
+        <strong class="text-white w-25">Totalt:</strong>
+        <span class="total-price text-white w-75">2000 kr</span>
       </div>
       <a href="cart.html" class="btn btn-primary m-3">Gå till kassan</a>
     </div>

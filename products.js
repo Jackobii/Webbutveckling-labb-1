@@ -27,7 +27,7 @@ const storeProducts = [
         id: 4,
         name: "Vår Dekadenta Chokladtårta",
         price: "149",
-        productinfo: "Denna tårtan smakar mycket choklad! Kanske lite för mycket... Men det är ju perfekt där du inte vill att gästerna ska äta för mycket tårta... Eller du själv...",
+        productinfo: "Denna tårtan smakar mycket choklad! Kanske lite för mycket... Men det är ju perfekt om du inte vill att gästerna ska äta för mycket tårta... Eller du själv...",
         ingredients: "Ingredienser",
         images:  ["img/cacao-product-4-1.jpg"]
     },
