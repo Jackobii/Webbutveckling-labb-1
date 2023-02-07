@@ -22,6 +22,10 @@
   integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
     </script>
 
+  <script defer src="products.js"></script>
+
+  <script defer src="site.js"></script>
+
 
 </head>
 
@@ -49,16 +53,63 @@
               <a class="nav-link" href="about.html">Om oss</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cart.html">
-                  <img src="/img/shoppingcart-icon.png" alt="Logo för kundvagn" height="30" width="auto">
-              </a>
+              <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                <img src="/img/shoppingcart-icon.png" alt="Logo för kundvagn" height="30" width="auto">
+            </button>
             </li>
           </ul>
         </div>
       </div>
     </nav>
   </header>
+  
   <main>
+    <div class="container">
+      <h1 class="text-center m-3">Våra Produkter</h1>
+      <div class="shop-products row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 justify-content-between">
+        
+        <template id="product-template">
+          <div class="col py-3 shop-items-wrapper">
+            <div class="card h-100 shop-product rounded-3">
+              <img src="img/cacao-product-1-1.jpg" class="card-img-top shop-item-image rounded-3" alt="...">
+              <div class="card-body">
+                <h5 class="card-title shop-item-name">Pure, Superduper Organic Cocoa Powder</h5>
+                <p class="card-text shop-item-productinfo">It's the purest you've ever seen...</p>
+                <p class="card-text shop-item-ingredients">Innehåller: 100% Pure Cacao </p>
+              </div>
+              
+              <div class="card-footer">
+                <div class="row w-auto h-auto justify-content-between">
+                  <p class="card-text w-auto h-100 fw-bold">Pris:</p>
+                  <p class="card-text shop-item-price w-auto h-100">120 kr</p>
+                  <button class="btn btn-secondary w-50">Köp</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+        
+      </div>
+    </div>
+
+    <!-- Min Offcanvas cart -->
+    <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-white align-self-center" id="offcanvasRightLabel">Din Kundvagn</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body text-white">
+        <!-- Vi vill ha items i kundvagnen här som cards -->
+        <div class="card" style="width: 90wv;">
+          <img src="img/25g-choco.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title text-black">Card title</h5>
+            <p class="card-text text-black">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+      </div>
+      <a href="cart.html" class="btn btn-primary m-3">Gå till kassan</a>
+    </div>
 
   </main>
   <footer>

@@ -50,9 +50,9 @@
                 <a class="nav-link" href="about.html">Om oss</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="cart.html">
+                <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                     <img src="/img/shoppingcart-icon.png" alt="Logo för kundvagn" height="30" width="auto">
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -117,6 +117,24 @@
             </div>
         </div>
     </div>
+
+    <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title text-white align-self-center" id="offcanvasRightLabel">Din Kundvagn</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body text-white">
+          <!-- Vi vill ha items i kundvagnen här som cards -->
+          <div class="card" style="width: 90wv;">
+            <img src="img/25g-choco.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title text-black">Card title</h5>
+              <p class="card-text text-black">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+        </div>
+        <a href="cart.html" class="btn btn-primary m-3">Gå till kassan</a>
+      </div>
 
   </main>
   <footer>

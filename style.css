@@ -4,3 +4,33 @@
     height: 70vh;
     overflow: hidden;
 }
+
+.card-img-top {
+    object-fit: cover;
+    height: 20vh;
+}
+
+/* .shop-product {
+
+}
+
+.shop-item-name {
+
+}
+
+.shop-item-price {
+
+}
+
+.shop-item-productinfo {
+
+}
+
+.shop-item-ingredients {
+
+}
+
+.shop-item-image {
+    
+} */
+
