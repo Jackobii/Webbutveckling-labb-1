@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>Choco Loco Shop</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,7 +35,7 @@
     <nav class="navbar navbar-expand-md">
       <div class="container-fluid">
         <img class="navbar-toggler"src="img/choco-logo.png" alt="Logotyp för hemsidan" height="70" width="auto"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-label="Knapp för att växla navigationsfältets synlighet">
         <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -53,7 +53,7 @@
               <a class="nav-link" href="about.html">Om oss</a>
             </li>
             <li class="nav-item">
-              <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+              <button class="btn btn-open-cart" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                 <img src="/img/shoppingcart-icon.png" alt="Logo för kundvagn" height="30" width="auto">
             </button>
             </li>
@@ -68,27 +68,7 @@
       <h1 class="text-center m-3">Våra Produkter</h1>
       <div class="shop-products row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 justify-content-between">
         
-        <template id="product-template">
-          <div class="col py-3 shop-items-wrapper">
-            <div class="card h-100 shop-product rounded-3">
-              <img src="img/cacao-product-1-1.jpg" class="card-img-top shop-item-image rounded-3" alt="...">
-              <div class="card-body">
-                <h5 class="card-title shop-item-name">Pure, Superduper Organic Cocoa Powder</h5>
-                <p class="card-text shop-item-productinfo">It's the purest you've ever seen...</p>
-                <p class="card-text shop-item-ingredients">Innehåller: 100% Pure Cacao </p>
-              </div>
-              
-              <div class="card-footer">
-                <div class="row w-auto h-auto justify-content-between">
-                  <p class="card-text my-auto w-auto shop-item-id"></p>
-                  <p class="card-text my-auto w-auto h-100 fw-bold">Pris:</p>
-                  <p class="card-text my-auto shop-item-price w-auto h-100">120 kr</p>
-                  <button class="btn btn-secondary" style="width:35%">Köp</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </template>
+        <!-- Här hamnar templates för produkter -->
         
       </div>
     </div>
@@ -99,26 +79,55 @@
         <h5 class="offcanvas-title text-white align-self-center" id="offcanvasRightLabel">Din Kundvagn</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-      <div class="offcanvas-body bg-dark">
-        <!-- Vi vill ha items i kundvagnen här som cards -->
-        <div class="card cart-item">
-          <img src="img/25g-choco.jpg" class="card-img-top card-img-top-cart" alt="...">
-          <div class="card-body">
-            <h5 class="card-title text-black">Card title</h5>
-          
-          </div>
-          <div class="card-footer w-100 d-flex justify-content-between">
-            <span>Antal: </span><input type="number" value="1">
-            <button class="btn btn-danger btn-remove-cart-item" >Ta bort</button>
-          </div>
-        </div>
+      <div class="offcanvas-body bg-dark cart-items">
+        <!-- Här hamnar items i kundvagnen som cards -->
       </div>
       <div class="row m-3">
         <strong class="text-white w-25">Totalt:</strong>
-        <span class="total-price text-white w-75">2000 kr</span>
+        <span class="text-white w-75" id="cart-items-total">1 kr</span>
       </div>
       <a href="cart.html" class="btn btn-primary m-3">Gå till kassan</a>
     </div>
+    
+    <template id="cart-item-template">
+      <div class="card cart-item my-2">
+        <img src="img/25g-choco.jpg" class="card-img-top card-img-top-cart cart-item-image" alt="...">
+        <div class="card-body">
+          <h5 class="card-title text-black cart-item-name col-12"></h5>
+          <div class="input-group d-flex justify-content-end">
+            <span class="input-group-text card-text my-auto w-auto cart-item-id flex-fill"></span>
+            <span class="input-group-text flex-fill">Kostnad i SEK:</span>
+            <span class="input-group-text cart-item-price flex-fill"></span>
+          </div>
+        </div>
+        <div class="card-footer w-100 h-100 d-flex justify-content-between">
+          <span class="d-flex align-items-center">Antal: </span>
+          <input class="cart-item-quantity-input" type="number" value="1">
+          <button class="btn btn-danger btn-remove-cart-item">Ta bort</button>
+        </div>
+      </div>
+    </template>
+
+    <template id="product-template">
+      <div class="col py-3 shop-items-wrapper">
+        <div class="card h-100 shop-product rounded-3">
+          <img src="img/cacao-product-1-1.jpg" class="card-img-top shop-item-image rounded-3" alt="...">
+          <div class="card-body">
+            <h5 class="card-title shop-item-name"></h5>
+            <p class="card-text shop-item-productinfo"></p>
+          </div>
+          
+          <div class="card-footer">
+            <div class="row w-auto h-auto justify-content-between">
+              <p class="card-text my-auto w-auto shop-item-id"></p>
+              <p class="card-text my-auto w-auto h-100 fw-bold">Pris:</p>
+              <p class="card-text my-auto shop-item-price w-auto h-100"></p>
+              <button class="btn btn-secondary btn-add-item-to-cart" style="width:35%">Köp</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
 
   </main>
   <footer>
