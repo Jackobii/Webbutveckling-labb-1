@@ -1,3 +1,6 @@
+let customerCart = JSON.parse(localStorage.getItem("cartStorage")) || [];
+
+
 if (document.readyState == "loading") {
     document.addEventListener("DOMContentLoaded", ready);
   } else {
@@ -9,6 +12,7 @@ const shopProducts = [];
 function ready () {
 
   generateProductCards();
+  populateCart();
 
   const removeCartItemButtons = document.getElementsByClassName("btn-remove-cart-item");
   for(let i = 0; i < removeCartItemButtons.length; i++) {
@@ -32,6 +36,10 @@ function ready () {
   for(let i = 0; i < openCartButton.length; i++) {
     const button = openCartButton[i];
     button.addEventListener("click", updateCartTotal);
+  }
+
+  if(document.body.id === "cart") {
+    document.getElementById("btn-purchase").addEventListener("click", purchaseClicked);
   }
 }
 
@@ -89,14 +97,23 @@ function addItemToCart(id, name, price, imageSrc) {
   cartItem.querySelector(".cart-item-quantity-input").addEventListener("change", quantityChanged);
 
   cartItems.append(cartItem);
-
+  
   updateCartTotal();
+  customerCart.push(new CartItem(id, name, price, imageSrc, 1));
+  saveCart();
 }
 
 function removeCartItem(event) {
   var buttonClicked = event.target;
-    buttonClicked.parentElement.parentElement.remove();
-    updateCartTotal();
+
+  const buttonItem = buttonClicked.parentElement.parentElement;
+  const buttonItemId = buttonItem.querySelector(".cart-item-id").innerText;
+  console.log(buttonItemId);
+
+  customerCart = customerCart.filter(cartItem => cartItem.id !== buttonItemId);
+
+  buttonClicked.parentElement.parentElement.remove();
+  updateCartTotal();
 }
 
 function updateCartTotal() {
@@ -111,11 +128,14 @@ function updateCartTotal() {
     const price = parseFloat(currentItemPriceElement.innerText.replace(' |k|r|', ''));
     const quantity = currentItemQuantityElement.value;
 
+
     cartTotal = cartTotal + (price * quantity);
   }
   cartTotal = Math.round(cartTotal * 100) / 100;
   const cartPriceTotal = document.getElementById("cart-items-total");
   cartPriceTotal.innerText = `${cartTotal} kr`;
+
+  saveCart();
 }
 
 function quantityChanged(event) {
@@ -123,5 +143,77 @@ function quantityChanged(event) {
   if(isNaN(input.value) || input.value <= 0){
     input.value = 1;
   }
+  const inputItem = input.parentElement.parentElement;
+  let inputItemId = inputItem.querySelector(".cart-item-id").innerText;
+
+  console.log(inputItemId)
+
+  updateQuantityCart(input.value, inputItemId);
   updateCartTotal();
+}
+
+function populateCart() {
+
+  if(customerCart === null) {
+    return;
+  }
+
+  const cart = document.querySelector(".cart-items");
+  const cartItemTemplate = document.querySelector("template#cart-item-template");
+
+  if(customerCart.length > 0){
+    for(const cartItem of customerCart) {
+      const newCartItem = cartItemTemplate.content.cloneNode(true);
+  
+      newCartItem.querySelector(".cart-item-id").innerText = cartItem.id;
+      newCartItem.querySelector(".cart-item-name").innerText = cartItem.name;
+      newCartItem.querySelector(".cart-item-price").innerText = cartItem.price;
+      newCartItem.querySelector(".cart-item-image").src = cartItem.imageSrc;
+      newCartItem.querySelector(".cart-item-quantity-input").value = cartItem.amount;
+  
+      newCartItem.querySelector(".btn-remove-cart-item").addEventListener("click", removeCartItem);
+      newCartItem.querySelector(".cart-item-quantity-input").addEventListener("change", quantityChanged);
+  
+      cart.append(newCartItem);
+    }
+  }
+  updateCartTotal();
+}
+
+function loadCart () {
+  customerCart = JSON.parse(localStorage.getItem("cartStorage"));
+}
+
+function saveCart() {
+  localStorage.setItem("cartStorage", JSON.stringify(customerCart)); 
+}
+
+function updateQuantityCart(value, id) {
+  for (const cartItem of customerCart) {
+    if(cartItem.id === id) {
+      cartItem.amount = value;
+      console.log(cartItem);
+    }
+  }
+}
+
+function purchaseClicked() {
+  alert("Tack för ditt köp!");
+  const cartItems = document.getElementsByClassName("cart-items")[0];
+  while(cartItems.hasChildNodes()) {
+    cartItems.removeChild(cartItems.firstChild);
+    updateCartTotal();
+    saveCart();
+  }
+
+}
+
+class CartItem {
+  constructor(id, name, price, imageSrc, amount) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.imageSrc = imageSrc;
+    this.amount = amount;
+  }
 }

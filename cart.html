@@ -25,7 +25,7 @@
   
   </head>
 
-<body>
+<body id="cart">
   <header>
     <!-- place navbar here -->
     <nav class="navbar navbar-expand-md">
@@ -59,6 +59,35 @@
       </nav>
   </header>
   <main>
+
+    <div class="container w-75">
+      <div class="bg-light row w-100">
+        <div class="col-lg-12">
+          <h1 class="m-4 text-center">Din Kundvagn</h1>
+          <div class="table-responsive">
+            <table class="table table-condensed table-hover">
+              <tr>
+                <thead>
+                  <th style="width: 74%">Produkt</th>
+                  <th style="width: 10%">Antal</th>
+                  <th style="width: 16%">Pris</th>
+                </thead>
+                <tbody>
+                  <td>Din kundvagn är tom!</td>
+                  <td></td>
+                  <td></td>
+                </tbody>
+              </tr>
+            </table>
+          </div>
+          <div class="float-end">
+            <span class="m-3 h3">Totalt: </span>
+            <span class="h3 m-3">1000 kr</span>
+          </div>
+          <button class="btn btn-primary m-3" id="btn-purchase">Lägg Order</button>
+        </div>
+      </div>
+    </div>
 
   </main>
   <footer>

@@ -22,10 +22,13 @@
   integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
     </script>
 
+  <script defer src="products.js"></script>
+
+  <script defer src="site.js"></script>
 
 </head>
 
-<body>
+<body id="about">
   <header>
     <!-- place navbar here -->
     <nav class="navbar navbar-expand-md">
@@ -49,16 +52,33 @@
               <a class="nav-link" href="about.html">Om oss</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="cart.html">
-                  <img src="/img/shoppingcart-icon.png" alt="Logo för kundvagn" height="30" width="auto">
-              </a>
+              <button class="btn btn-open-cart" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                <img src="/img/shoppingcart-icon.png" alt="Logo för kundvagn" height="30" width="auto">
+              </button>
             </li>
           </ul>
         </div>
       </div>
     </nav>
   </header>
+
   <main>
+
+    <!-- Min Offcanvas cart -->
+    <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-white align-self-center" id="offcanvasRightLabel">Din Kundvagn</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body bg-dark cart-items">
+        <!-- Här hamnar items i kundvagnen som cards -->
+      </div>
+      <div class="row m-3">
+        <strong class="text-white w-25">Totalt:</strong>
+        <span class="text-white w-75" id="cart-items-total">0 kr</span>
+      </div>
+      <a href="cart.html" class="btn btn-primary m-3">Gå till kassan</a>
+    </div>
 
     <div class="container-fluid m-3 p-3">
       <div class="row align-items-lg-stretch p-3">
@@ -83,8 +103,27 @@
         <div class="col-lg-8 p-3 map-container bg-dark">
           <iframe class="rounded-3" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1007.3647771090655!2d12.035975927554402!3d57.65645232459628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464ff22a2ad433b5%3A0x5d58a75ed93edf41!2sPixbov%C3%A4gen%203A%20Parking!5e0!3m2!1ssv!2sse!4v1676120073381!5m2!1ssv!2sse" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
+      </div>
     </div>
-    </div>
+
+    <template id="cart-item-template">
+      <div class="card cart-item my-2">
+        <img src="img/25g-choco.jpg" class="card-img-top card-img-top-cart cart-item-image" alt="...">
+        <div class="card-body">
+          <h5 class="card-title text-black cart-item-name col-12"></h5>
+          <div class="input-group d-flex justify-content-end">
+            <span class="input-group-text card-text my-auto w-auto cart-item-id flex-fill"></span>
+            <span class="input-group-text flex-fill">Kostnad i SEK:</span>
+            <span class="input-group-text cart-item-price flex-fill"></span>
+          </div>
+        </div>
+        <div class="card-footer w-100 h-100 d-flex justify-content-between">
+          <span class="d-flex align-items-center">Antal: </span>
+          <input class="cart-item-quantity-input" type="number" value="1">
+          <button class="btn btn-danger btn-remove-cart-item">Ta bort</button>
+        </div>
+      </div>
+    </template>
 
   </main>
   <footer>

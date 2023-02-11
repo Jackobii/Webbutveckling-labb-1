@@ -25,7 +25,7 @@
 
 </head>
 
-<body>
+<body id="index">
   <header>
 
     <!-- place navbar here -->
@@ -61,7 +61,6 @@
 
   </header>
   <main>
-
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -119,22 +118,19 @@
     </div>
 
     <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title text-white align-self-center" id="offcanvasRightLabel">Din Kundvagn</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body text-white">
-          <!-- Vi vill ha items i kundvagnen här som cards -->
-          <div class="card" style="width: 90wv;">
-            <img src="img/25g-choco.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-black">Card title</h5>
-              <p class="card-text text-black">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-        </div>
-        <a href="cart.html" class="btn btn-primary m-3">Gå till kassan</a>
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title text-white align-self-center" id="offcanvasRightLabel">Din Kundvagn</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
+      <div class="offcanvas-body bg-dark cart-items">
+        <!-- Här hamnar items i kundvagnen som cards -->
+      </div>
+      <div class="row m-3">
+        <strong class="text-white w-25">Totalt:</strong>
+        <span class="text-white w-75" id="cart-items-total">1 kr</span>
+      </div>
+      <a href="cart.html" class="btn btn-primary m-3">Gå till kassan</a>
+    </div>
 
   </main>
   <footer>
