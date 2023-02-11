@@ -15,3 +15,12 @@
     height: 12vh;
 }
 
+.map-container {
+    height: 75vh;
+}
+
+.card-img-top-about {
+    object-fit: cover;
+    height: 25vh;
+}
+
