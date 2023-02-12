@@ -23,7 +23,6 @@ function ready () {
       populateCart();
       break;
     case "cart":
-      populateCart();
       populateCartCheckout();
       
       break;
@@ -120,7 +119,7 @@ function removeCartItem(event) {
   var buttonClicked = event.target;
 
   const buttonItem = buttonClicked.parentElement.parentElement;
-  const buttonItemId = buttonItem.querySelector(".cart-item-id").innerText;
+  const buttonItemId = buttonItem.querySelector(".cart-item-id").innerText.replace("Id: ", "");
   console.log(buttonItemId);
 
   customerCart = customerCart.filter(cartItem => cartItem.id !== buttonItemId);
@@ -142,17 +141,12 @@ function updateCartTotal() {
     const price = parseFloat(currentItemPriceElement.innerText.replace(" kr", ""));
     const quantity = currentItemQuantityElement.value;
 
-
     cartTotal = cartTotal + (price * quantity);
   }
   cartTotal = Math.round(cartTotal * 100) / 100;
+
   const cartPriceTotal = document.getElementById("cart-items-total");
   cartPriceTotal.innerText = `${cartTotal} kr`;
-
-  if(document.body.id == "cart") {
-    const checkoutCartPriceTotal = document.getElementById("checkout-cart-total");
-    checkoutCartPriceTotal.innerText = `${cartTotal} kr`;
-  }
   saveCart();
 }
 
@@ -163,8 +157,6 @@ function quantityChanged(event) {
   }
   const inputItem = input.parentElement.parentElement;
   let inputItemId = inputItem.querySelector(".cart-item-id").innerText.replace("Id: ", "");
-
-  console.log(inputItemId)
 
   updateQuantityCart(input.value, inputItemId);
   updateCartTotal();
@@ -200,7 +192,18 @@ function populateCart() {
 
 function populateCartCheckout() {
   const checkoutCart = document.querySelector(".checkout-cart-items");
-  const checkoutCartItemTemplate = document.querySelector("template#checkout-cart-item-template")
+  const checkoutCartItemTemplate = document.querySelector("template#checkout-cart-item-template");
+
+  if(customerCart.length == 0) {
+    const newCheckoutCartItem = checkoutCartItemTemplate.content.cloneNode(true);
+    
+    newCheckoutCartItem.querySelector(".checkout-cart-item-name").innerText = "Din kundvagn är tom!";
+    newCheckoutCartItem.querySelector(".checkout-cart-item-price").innerText = 0;
+
+    checkoutCart.append(newCheckoutCartItem);
+    updateCheckoutCartTotal();
+    return;
+  }
 
   if(customerCart.length > 0){
     for(const cartItem of customerCart) {
@@ -214,7 +217,7 @@ function populateCartCheckout() {
       checkoutCart.append(newCheckoutCartItem);
     }
   }
-  updateCartTotal();
+  updateCheckoutCartTotal();
 }
 
 
@@ -234,19 +237,49 @@ function updateQuantityCart(value, id) {
   }
 }
 
+function updateCheckoutCartTotal() {
+  const allCartItems = document.getElementsByClassName("checkout-cart-items");
+  let cartTotal = 0;
+
+  for(let i = 0; i < allCartItems.length; i++) {
+    const currentCartItem = allCartItems[i];
+    const currentItemPriceElement = currentCartItem.getElementsByClassName("checkout-cart-item-price")[0];
+    const currentItemQuantityElement = currentCartItem.getElementsByClassName("checkout-cart-item-quantity")[0];
+
+    const price = parseFloat(currentItemPriceElement.innerText.replace(" kr", ""));
+    const quantity = currentItemQuantityElement.innerText;
+
+
+    cartTotal = cartTotal + (price * quantity);
+  }
+  cartTotal = Math.round(cartTotal * 100) / 100;
+
+
+  const cartPriceTotal = document.getElementById("checkout-cart-total");
+  cartPriceTotal.innerText = `${cartTotal} kr`;
+
+}
+
 function purchaseClicked() {
   alert("Tack för ditt köp!");
-  const cartItems = document.getElementsByClassName("cart-items")[0];
-  const checkoutCartItems = document.getElementsByClassName("checkout-cart-items")[0];
 
-  while (checkoutCartItems.hasChildNodes()){
-    checkoutCartItems.removeChild(cartItems.firstChild);
-  }
-  while(cartItems.hasChildNodes()) {
-    cartItems.removeChild(cartItems.firstChild);
-    updateCartTotal();
-    saveCart();
-  }
+  customerCart = [];
+
+  saveCart();
+  loadCart();
+
+  // const cartItems = document.getElementsByClassName("checkout-cart-items")[0];
+  // const checkoutCartItems = document.getElementsByClassName("checkout-cart-items")[0];
+
+  // while (checkoutCartItems.hasChildNodes()){
+  //   checkoutCartItems.removeChild(cartItems.firstChild);
+  // }
+  // while(cartItems.hasChildNodes()) {
+  //   cartItems.removeChild(cartItems.firstChild);
+  //   updateCartTotal();
+  //   saveCart();
+  // }
+  location.reload();
 }
 
 class CartItem {
