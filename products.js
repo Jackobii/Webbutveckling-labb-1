@@ -5,7 +5,7 @@ const storeProducts = [
         price: "250",
         productinfo: "It's the purest you've ever seen...",
         ingredients: "100% Pure Cacao",
-        images:  ["img/cacao-product-1-1.jpg"]
+        images:  ["img/cacao-product-1-1.webp"]
     },
     {
         id: 2,
@@ -21,7 +21,7 @@ const storeProducts = [
         price: "89",
         productinfo: "Chokladkaka av 100% ren kakao är rena drömmen. Smaken är väl avvägd och skapar en riktig chokladharmoni utan att bli för besk. Lika god att äta som att toppa bakverk med.",
         ingredients: "Kakao",
-        images:  ["img/25g-choco.jpg"]
+        images:  ["img/25g-choco.webp"]
     },
     {
         id: 4,
@@ -29,7 +29,7 @@ const storeProducts = [
         price: "149",
         productinfo: "Denna tårtan smakar mycket choklad! Kanske lite för mycket... Men det är ju perfekt om du inte vill att gästerna ska äta för mycket tårta... Eller du själv...",
         ingredients: "Ingredienser",
-        images:  ["img/cacao-product-4-1.jpg"]
+        images:  ["img/cacao-product-4-1.webp"]
     },
     {
         id: 5,
@@ -37,7 +37,7 @@ const storeProducts = [
         price: "49",
         productinfo: "Gillar du hembakat, men orkar inte baka? Då har vi lösningen! Våra brownies är supergoda och du slipper allt kladd kring baket! Passa på!",
         ingredients: "Ingredienser",
-        images:  ["img/cacao-product-5-1.jpg"]
+        images:  ["img/cacao-product-5-1.webp"]
     },
     {
         id: 6,
@@ -45,6 +45,6 @@ const storeProducts = [
         price: "69",
         productinfo: "Vår allra godaste chokladglass! Gjord i köket här hemma på enbart grädde, mjölk, socker, ägg, salt och kakao från våra egna odlingar nere i södra Skåne. Mums!",
         ingredients: "grädde, mjölk, ägg, kakao, salt",
-        images:  ["img/cacao-product-6-1.jpg"]
+        images:  ["img/cacao-product-6-1.webp"]
     }
 ];

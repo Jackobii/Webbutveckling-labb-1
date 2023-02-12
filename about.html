@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-  <title>Title</title>
+  <title>Cocoa-Loco - Om Oss</title>
+  <meta name="keywords" content="chocolate, choklad, kakao, cocoa, cocoa bean">
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,29 +32,29 @@
 <body id="about">
   <header>
     <!-- place navbar here -->
-    <nav class="navbar navbar-expand-md">
+    <nav class="navbar navbar-expand-md bg-yellowishbrown">
       <div class="container-fluid">
-        <img class="navbar-toggler"src="img/choco-logo.png" alt="Logotyp för hemsidan" height="70" width="auto"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+        <img class="navbar-toggler"src="img/choco-loco-logo.webp" alt="Logotyp för hemsidan" height="120" width="auto"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-label="Knapp för att växla navigationsfältets synlighet">
         <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbar">
+        <div class="collapse navbar-collapse text-font-bungee" id="navbar">
           <ul class="navbar-nav fw-bold align-items-center w-100 justify-content-evenly">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html">Hem</a>
+              <a class="nav-link" aria-current="page" href="index.html">Hem</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="shop.html">Produkter</a>
             </li>
             <a class="navbar-brand" href="index.html">
-              <img src="img/choco-logo.png" alt="Logotyp för hemsidan" height="70" width="auto"></a>
+              <img src="img/choco-loco-logo.webp" alt="Logotyp för hemsidan" height="120" width="auto"></a>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">Om oss</a>
+              <a class="nav-link active" href="about.html">Om oss</a>
             </li>
             <li class="nav-item">
               <button class="btn btn-open-cart" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                <img src="/img/shoppingcart-icon.png" alt="Logo för kundvagn" height="30" width="auto">
+                <img src="/img/shoppingcart-icon.webp" alt="Logo för kundvagn" height="30" width="auto">
               </button>
             </li>
           </ul>
@@ -80,11 +81,11 @@
       <a href="cart.html" class="btn btn-primary m-3">Gå till kassan</a>
     </div>
 
-    <div class="container-fluid m-3 p-3">
-      <div class="row align-items-lg-stretch p-3">
-        <div class="col-lg-4 p-3 bg-dark">
+    <div class="container-fluid m-3 p-3 ">
+      <div class="row align-items-lg-stretch p-3 border border-2">
+        <div class="col-lg-4 p-3">
           <div class="card h-100">
-            <img src="img/plocka-cocoa.jpg" class="card-img-top card-img-top-about" alt="...">
+            <img src="img/plocka-cocoa.webp" class="card-img-top card-img-top-about" alt="...">
             <div class="card-body height=100">
               <h2 class="card-title text-black cart-item-name col-12">Om Oss!</h2>
               <p class="card-text">Vi är ett litet gäng chokladfantaster som vill göra de bästa chokladprodukterna för just dig! <br> 
@@ -100,7 +101,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-8 p-3 map-container bg-dark">
+        <div class="col-lg-8 p-3 map-container">
           <iframe class="rounded-3" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1007.3647771090655!2d12.035975927554402!3d57.65645232459628!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464ff22a2ad433b5%3A0x5d58a75ed93edf41!2sPixbov%C3%A4gen%203A%20Parking!5e0!3m2!1ssv!2sse!4v1676120073381!5m2!1ssv!2sse" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
@@ -126,8 +127,20 @@
     </template>
 
   </main>
-  <footer>
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 bg-yellowishbrown">
     <!-- place footer here -->
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="index.html" class="mb-3 me-2 mb-md-0 text-white text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+        <span class="mb-3 mb-md-0 text-white">© 2023 Jacob Fjellström</span>
+      </div>
+  
+      <!-- <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+        <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+      </ul> -->
   </footer>
 </body>
 

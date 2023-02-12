@@ -1,3 +1,9 @@
+@font-face {
+    font-display: swap;
+    font-family: 'Bungee Inline';
+    src: url("../fonts/bungeeinline-regular-webfont.woff2") format("woff2");
+  }
+
 .carousel-item img{
     object-fit: cover;
     object-position: center;
@@ -23,4 +29,31 @@
     object-fit: cover;
     height: 25vh;
 }
+
+.bg-yellowishbrown {
+    background-color: #E6B17E;
+}
+
+.bg-licorice {
+    background-color: #996E45;
+}
+
+.bg-mountbattenpink {
+    background-color: #827081;
+}
+
+.text-font-bungee {
+    font-family: 'Bungee Inline', sans-serif;
+}
+
+.btn-primary {
+    background-color: #827081 !important;
+    border-color: #D183C9 !important;
+}
+
+.btn-secondary {
+    background-color: #8B5FBF!important;
+    border-color: #A8DCD9 !important;
+}
+
 
