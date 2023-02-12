@@ -11,8 +11,27 @@ const shopProducts = [];
 
 function ready () {
 
-  generateProductCards();
-  populateCart();
+  switch(document.body.id) {
+    case "shop": 
+      generateProductCards();
+
+      const addToCartButtons = document.getElementsByClassName("btn-add-item-to-cart");
+      for(let i = 0; i < addToCartButtons.length; i++) {
+        const button = addToCartButtons[i];
+        button.addEventListener("click", addItemToCartClicked);
+      }
+      populateCart();
+      break;
+    case "cart":
+      populateCart();
+      populateCartCheckout();
+      
+      break;
+    default:
+      populateCart();
+      break;
+  }
+
 
   const removeCartItemButtons = document.getElementsByClassName("btn-remove-cart-item");
   for(let i = 0; i < removeCartItemButtons.length; i++) {
@@ -24,12 +43,6 @@ function ready () {
   for(let i = 0; i < quantity.length; i++) {
     const input = quantity[i];
     input.addEventListener("change", quantityChanged);
-  }
-
-  const addToCartButtons = document.getElementsByClassName("btn-add-item-to-cart");
-  for(let i = 0; i < addToCartButtons.length; i++) {
-    const button = addToCartButtons[i];
-    button.addEventListener("click", addItemToCartClicked);
   }
 
   const openCartButton = document.getElementsByClassName("btn-open-cart");
@@ -64,7 +77,7 @@ function addItemToCartClicked(event){
   const button = event.target;
   const shopItem = button.parentElement.parentElement.parentElement;
 
-  const id = shopItem.querySelector(".shop-item-id").innerText;
+  const id = shopItem.querySelector(".shop-item-id").innerText.replace("Id: ", "");
   const name = shopItem.querySelector(".shop-item-name").innerText;
   const price = shopItem.querySelector(".shop-item-price").innerText;
   const imageSrc = shopItem.querySelector(".shop-item-image").src;
@@ -79,7 +92,7 @@ function addItemToCart(id, name, price, imageSrc) {
   const cartItemsId = cartItems.getElementsByClassName("cart-item-id");
 
   for(let i = 0; i < cartItemsId.length; i++) {
-    if(cartItemsId[i].textContent == id) {
+    if(cartItemsId[i].textContent == `Id: ${id}`) {
       alert("Den här varan finns redan i din varukorg!");
       return;
     }
@@ -88,7 +101,7 @@ function addItemToCart(id, name, price, imageSrc) {
   const cartItemTemplate = document.getElementById("cart-item-template");
   const cartItem = cartItemTemplate.content.cloneNode(true);
 
-  cartItem.querySelector(".cart-item-id").innerText = id;
+  cartItem.querySelector(".cart-item-id").innerText = `Id: ${id}`;
   cartItem.querySelector(".cart-item-name").innerText = name;
   cartItem.querySelector(".cart-item-price").innerText = price;
   cartItem.querySelector(".cart-item-image").src = imageSrc;
@@ -113,6 +126,7 @@ function removeCartItem(event) {
   customerCart = customerCart.filter(cartItem => cartItem.id !== buttonItemId);
 
   buttonClicked.parentElement.parentElement.remove();
+
   updateCartTotal();
 }
 
@@ -125,7 +139,7 @@ function updateCartTotal() {
     const currentItemPriceElement = currentCartItem.getElementsByClassName("cart-item-price")[0];
     const currentItemQuantityElement = currentCartItem.getElementsByClassName("cart-item-quantity-input")[0];
 
-    const price = parseFloat(currentItemPriceElement.innerText.replace(' |k|r|', ''));
+    const price = parseFloat(currentItemPriceElement.innerText.replace(" kr", ""));
     const quantity = currentItemQuantityElement.value;
 
 
@@ -135,6 +149,10 @@ function updateCartTotal() {
   const cartPriceTotal = document.getElementById("cart-items-total");
   cartPriceTotal.innerText = `${cartTotal} kr`;
 
+  if(document.body.id == "cart") {
+    const checkoutCartPriceTotal = document.getElementById("checkout-cart-total");
+    checkoutCartPriceTotal.innerText = `${cartTotal} kr`;
+  }
   saveCart();
 }
 
@@ -144,7 +162,7 @@ function quantityChanged(event) {
     input.value = 1;
   }
   const inputItem = input.parentElement.parentElement;
-  let inputItemId = inputItem.querySelector(".cart-item-id").innerText;
+  let inputItemId = inputItem.querySelector(".cart-item-id").innerText.replace("Id: ", "");
 
   console.log(inputItemId)
 
@@ -165,7 +183,7 @@ function populateCart() {
     for(const cartItem of customerCart) {
       const newCartItem = cartItemTemplate.content.cloneNode(true);
   
-      newCartItem.querySelector(".cart-item-id").innerText = cartItem.id;
+      newCartItem.querySelector(".cart-item-id").innerText = `Id: ${cartItem.id}`;
       newCartItem.querySelector(".cart-item-name").innerText = cartItem.name;
       newCartItem.querySelector(".cart-item-price").innerText = cartItem.price;
       newCartItem.querySelector(".cart-item-image").src = cartItem.imageSrc;
@@ -180,6 +198,26 @@ function populateCart() {
   updateCartTotal();
 }
 
+function populateCartCheckout() {
+  const checkoutCart = document.querySelector(".checkout-cart-items");
+  const checkoutCartItemTemplate = document.querySelector("template#checkout-cart-item-template")
+
+  if(customerCart.length > 0){
+    for(const cartItem of customerCart) {
+      const newCheckoutCartItem = checkoutCartItemTemplate.content.cloneNode(true);
+  
+      newCheckoutCartItem.querySelector(".checkout-cart-item-id").innerText = (cartItem.id).replace("Id: ", "");
+      newCheckoutCartItem.querySelector(".checkout-cart-item-name").innerText = cartItem.name;
+      newCheckoutCartItem.querySelector(".checkout-cart-item-price").innerText = cartItem.price;
+      newCheckoutCartItem.querySelector(".checkout-cart-item-quantity").innerText = cartItem.amount;
+  
+      checkoutCart.append(newCheckoutCartItem);
+    }
+  }
+  updateCartTotal();
+}
+
+
 function loadCart () {
   customerCart = JSON.parse(localStorage.getItem("cartStorage"));
 }
@@ -192,7 +230,6 @@ function updateQuantityCart(value, id) {
   for (const cartItem of customerCart) {
     if(cartItem.id === id) {
       cartItem.amount = value;
-      console.log(cartItem);
     }
   }
 }
@@ -200,12 +237,16 @@ function updateQuantityCart(value, id) {
 function purchaseClicked() {
   alert("Tack för ditt köp!");
   const cartItems = document.getElementsByClassName("cart-items")[0];
+  const checkoutCartItems = document.getElementsByClassName("checkout-cart-items")[0];
+
+  while (checkoutCartItems.hasChildNodes()){
+    checkoutCartItems.removeChild(cartItems.firstChild);
+  }
   while(cartItems.hasChildNodes()) {
     cartItems.removeChild(cartItems.firstChild);
     updateCartTotal();
     saveCart();
   }
-
 }
 
 class CartItem {
