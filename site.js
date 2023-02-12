@@ -12,6 +12,10 @@ const shopProducts = [];
 function ready () {
 
   switch(document.body.id) {
+    case "index":
+      generateDadJoke();
+      populateCart();
+      break;
     case "shop": 
       generateProductCards();
 
@@ -24,7 +28,6 @@ function ready () {
       break;
     case "cart":
       populateCartCheckout();
-      
       break;
     default:
       populateCart();
@@ -253,9 +256,6 @@ function updateCheckoutCartTotal() {
 
 
     cartTotal = cartTotal + (price * quantity);
-
-    console.log(allCartItems.length)
-    console.log(cartTotal)
   }
   cartTotal = Math.round(cartTotal * 100) / 100;
 
@@ -274,6 +274,20 @@ function purchaseClicked() {
   loadCart();
 
   location.reload();
+}
+
+async function generateDadJoke() {
+  const response = await fetch("https://icanhazdadjoke.com", {
+  headers: {
+    Accept: "application/json",
+  },
+});
+  if(response.status === 200) {
+    const jsonResponse = await response.json(); 
+
+    const punschline = document.getElementById("dad-joke");
+    punschline.innerText = jsonResponse.joke;
+  }
 }
 
 class CartItem {
