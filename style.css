@@ -1,7 +1,7 @@
 @font-face {
     font-display: swap;
     font-family: 'Bungee Inline';
-    src: url("/fonts/bungeeinline-regular-webfont.woff2") format("woff2");
+    src: url("./fonts/bungeeinline-regular-webfont.woff2") format("woff2");
   }
 
 .carousel-item img{
