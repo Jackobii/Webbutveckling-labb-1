@@ -30,6 +30,10 @@
     height: 25vh;
 }
 
+.logo-toggler {
+    aspect-ratio: 300 / 338;
+}
+
 .bg-yellowishbrown {
     background-color: #E6B17E;
 }

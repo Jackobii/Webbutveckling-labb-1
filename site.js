@@ -70,6 +70,8 @@ function generateProductCards() {
 
     shopProducts.append(shopProduct);
   }
+  let footer = document.getElementById("shop-footer");
+  footer.classList.remove("d-none");
 }
 
 function addItemToCartClicked(event){
@@ -238,7 +240,7 @@ function updateQuantityCart(value, id) {
 }
 
 function updateCheckoutCartTotal() {
-  const allCartItems = document.getElementsByClassName("checkout-cart-items");
+  const allCartItems = document.getElementsByClassName("checkout-item");
   let cartTotal = 0;
 
   for(let i = 0; i < allCartItems.length; i++) {
@@ -251,6 +253,9 @@ function updateCheckoutCartTotal() {
 
 
     cartTotal = cartTotal + (price * quantity);
+
+    console.log(allCartItems.length)
+    console.log(cartTotal)
   }
   cartTotal = Math.round(cartTotal * 100) / 100;
 
@@ -268,17 +273,6 @@ function purchaseClicked() {
   saveCart();
   loadCart();
 
-  // const cartItems = document.getElementsByClassName("checkout-cart-items")[0];
-  // const checkoutCartItems = document.getElementsByClassName("checkout-cart-items")[0];
-
-  // while (checkoutCartItems.hasChildNodes()){
-  //   checkoutCartItems.removeChild(cartItems.firstChild);
-  // }
-  // while(cartItems.hasChildNodes()) {
-  //   cartItems.removeChild(cartItems.firstChild);
-  //   updateCartTotal();
-  //   saveCart();
-  // }
   location.reload();
 }
 
