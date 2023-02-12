@@ -22,6 +22,10 @@
   integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
     </script>
 
+  <script defer src="products.js"></script>
+
+  <script defer src="site.js"></script>
+
 
 </head>
 
@@ -117,6 +121,7 @@
         </div>
     </div>
 
+    <!-- Min Offcanvas cart -->
     <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
       <div class="offcanvas-header">
         <h5 class="offcanvas-title text-white align-self-center" id="offcanvasRightLabel">Din Kundvagn</h5>
@@ -132,6 +137,25 @@
       <a href="cart.html" class="btn btn-primary m-3">Gå till kassan</a>
     </div>
 
+    <template id="cart-item-template">
+      <div class="card cart-item my-2">
+        <img src="img/25g-choco.jpg" class="card-img-top card-img-top-cart cart-item-image" alt="...">
+        <div class="card-body">
+          <h5 class="card-title text-black cart-item-name col-12"></h5>
+          <div class="input-group d-flex justify-content-end">
+            <span class="input-group-text card-text my-auto w-auto cart-item-id flex-fill"></span>
+            <span class="input-group-text flex-fill">Kostnad i SEK:</span>
+            <span class="input-group-text cart-item-price flex-fill"></span>
+          </div>
+        </div>
+        <div class="card-footer w-100 h-100 d-flex justify-content-between">
+          <span class="d-flex align-items-center">Antal: </span>
+          <input class="cart-item-quantity-input" type="number" value="1">
+          <button class="btn btn-danger btn-remove-cart-item">Ta bort</button>
+        </div>
+      </div>
+    </template>
+    
   </main>
   <footer>
     <!-- place footer here -->
