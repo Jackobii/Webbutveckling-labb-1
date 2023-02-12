@@ -30,6 +30,10 @@
     height: 25vh;
 }
 
+/* .modal-item-image {
+    overflow: hidden;
+} */
+
 .logo-toggler {
     aspect-ratio: 300 / 338;
 }

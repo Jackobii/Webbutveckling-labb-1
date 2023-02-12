@@ -18,12 +18,6 @@ function ready () {
       break;
     case "shop": 
       generateProductCards();
-
-      const addToCartButtons = document.getElementsByClassName("btn-add-item-to-cart");
-      for(let i = 0; i < addToCartButtons.length; i++) {
-        const button = addToCartButtons[i];
-        button.addEventListener("click", addItemToCartClicked);
-      }
       populateCart();
       break;
     case "cart":
@@ -53,6 +47,7 @@ function ready () {
     button.addEventListener("click", updateCartTotal);
   }
 
+
   if(document.body.id === "cart") {
     document.getElementById("btn-purchase").addEventListener("click", purchaseClicked);
   }
@@ -65,11 +60,14 @@ function generateProductCards() {
   for (const item of storeProducts) {
     const shopProduct = productTemplate.content.cloneNode(true);
 
-    shopProduct.querySelector(".shop-item-image").src = item.images;
+    // shopProduct.querySelector(".shop-item-image").src = item.images;
     shopProduct.querySelector(".shop-item-name").innerText = item.name;
     shopProduct.querySelector(".shop-item-productinfo").innerText = item.productinfo;
     shopProduct.querySelector(".shop-item-id").innerText = `Id: ${item.id}`;
     shopProduct.querySelector(".shop-item-price").innerText = `${item.price} kr`;
+
+    const moreInfoButton = shopProduct.querySelector(".btn-more-info");
+    moreInfoButton.addEventListener("click", (() => {generateModal(item.id)}));
 
     shopProducts.append(shopProduct);
   }
@@ -88,6 +86,13 @@ function addItemToCartClicked(event){
 
   console.log(id, name, price, imageSrc);
   addItemToCart(id, name, price, imageSrc);
+  updateCartTotal();
+}
+
+function addItemToCartClicked2(id){
+  const item = storeProducts.find(element => element.id === id);
+
+  addItemToCart(item.id, item.name, item.price, item.images);
   updateCartTotal();
 }
 
@@ -125,9 +130,9 @@ function removeCartItem(event) {
 
   const buttonItem = buttonClicked.parentElement.parentElement;
   const buttonItemId = buttonItem.querySelector(".cart-item-id").innerText.replace("Id: ", "");
-  console.log(buttonItemId);
-
-  customerCart = customerCart.filter(cartItem => cartItem.id !== buttonItemId);
+  
+  customerCart = customerCart.filter(cartItem => cartItem.id != buttonItemId);
+  saveCart();
 
   buttonClicked.parentElement.parentElement.remove();
 
@@ -214,7 +219,7 @@ function populateCartCheckout() {
     for(const cartItem of customerCart) {
       const newCheckoutCartItem = checkoutCartItemTemplate.content.cloneNode(true);
   
-      newCheckoutCartItem.querySelector(".checkout-cart-item-id").innerText = (cartItem.id).replace("Id: ", "");
+      newCheckoutCartItem.querySelector(".checkout-cart-item-id").innerText = (cartItem.id);
       newCheckoutCartItem.querySelector(".checkout-cart-item-name").innerText = cartItem.name;
       newCheckoutCartItem.querySelector(".checkout-cart-item-price").innerText = cartItem.price;
       newCheckoutCartItem.querySelector(".checkout-cart-item-quantity").innerText = cartItem.amount;
@@ -288,6 +293,20 @@ async function generateDadJoke() {
     const punschline = document.getElementById("dad-joke");
     punschline.innerText = jsonResponse.joke;
   }
+}
+
+function generateModal(id) {
+  const item = storeProducts.find(element => element.id === id);
+
+  document.querySelector(".modal-item-image").src = item.images;
+  document.querySelector(".modal-item-name").innerText = item.name;
+  document.querySelector(".modal-item-productinfo").innerText = item.productinfo;
+  document.querySelector(".modal-item-price").innerText = `${item.price} kr`;
+  document.querySelector(".modal-item-ingredients").innerText = item.ingredients;
+
+  const addToCartButton = document.querySelector(".btn-add-item-to-cart");
+  addToCartButton.setAttribute("onClick", `addItemToCartClicked2(${item.id})`);
+  // addToCartButton.addEventListener("click", (() => {addItemToCart(item.id, item.name, item.price, item.images);}));
 }
 
 class CartItem {
